@@ -1,0 +1,137 @@
+﻿<Window x:Class="gestion.AddEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gestion"
+        mc:Ignorable="d"
+        Title="AddEmployee" Height="470" Width="820" FontSize="20" FontFamily="helvetica" FontWeight="Medium" Background="#B3E5FC">
+
+
+    <Grid Margin="20">
+        <Grid.Resources>
+            <!-- Button Style -->
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#F5F5F5"/>
+                <Setter Property="Foreground" Value="black"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Labels and TextBoxes for Employee Details -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="0,10">
+            <Label Content="Nom:" Width="80" VerticalAlignment="Center"/>
+            <TextBox x:Name="NameTextBox" Width="200" Margin="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="0,10">
+            <Label Content="CIN:" Width="80" VerticalAlignment="Center"/>
+            <TextBox x:Name="CINTextBox" Width="200" Margin="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Margin="0,10">
+            <Label Content="Projet:" Width="80" VerticalAlignment="Center"/>
+            <TextBox x:Name="ProjectTextBox" Width="200" Margin="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Margin="0,10">
+            <Label Content="Famille:" Width="80" VerticalAlignment="Center"/>
+            <TextBox x:Name="FamilleTextBox" Width="200" Margin="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="4" Orientation="Horizontal" Margin="0,10">
+            <Label Content="Zone:" Width="80" VerticalAlignment="Center"/>
+            <TextBox x:Name="ZoneTextBox" Width="200" Margin="5,0"/>
+        </StackPanel>
+
+        <!-- Qualifications and Levels -->
+
+
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"   Orientation="Horizontal" Margin="5,0">
+            <TextBlock  Text="Qualification:" Grid.Row="5" Margin="0,10,60,10" VerticalAlignment="Center" Width="140" Height="32"/>
+            <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Right" x:Name="QualificationComboBox" BorderBrush="Gray" BorderThickness="1" ItemsSource="{Binding quals}"  Width="200" Margin="0,10,5,10">
+
+
+            </ComboBox>
+            <ComboBox HorizontalAlignment="Right" x:Name="QualificationLevelComboBox" BorderBrush="Gray" BorderThickness="1" Width="130" Margin="0,10">
+                <ComboBoxItem Content="Rouge"/>
+                <ComboBoxItem Content="Jaune"/>
+                <ComboBoxItem Content="Vert"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Buttons for Adding Qualifications and Employees -->
+        <Button Click="Add_Qualification_Click" Grid.Row="6" Margin="10,20,0,20" HorizontalAlignment="Left" Width="226" Height="40">
+            <StackPanel Orientation="Horizontal">
+                <Label  Content="&#x2b;" Foreground="Teal" FontFamily="./#Font Awesome 6 Free Solid" Width="32"/>
+                <TextBlock Text="Ajouter Qualification" Height="26" Width="192"/>
+            </StackPanel>
+        </Button>
+
+        <Button Click="Add_Employee_Click" Grid.Column="2" Grid.Row="6" Margin="243,20,0,20" HorizontalAlignment="Left" Width="217" Height="40">
+            <StackPanel Orientation="Horizontal">
+                <Label  Content="&#xF234;" Foreground="Teal" FontFamily="./#Font Awesome 6 Free Solid" Width="39"/>
+                <TextBlock Text="Ajouter Employé"/>
+            </StackPanel>
+        </Button>
+        <DataGrid x:Name="lista" Background="LightGray" ItemsSource="{Binding Path=currentEmployee.Qualifications}" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="10" IsReadOnly="True" AutoGenerateColumns="False" CanUserDeleteRows="True"
+             DisplayMemberPath="Name" SelectionMode="Single"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Qualification" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Niveau" Binding="{Binding Level}" Width="*" >
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Level}" Value="Vert">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Level}" Value="Jaune">
+                                    <Setter Property="Background" Value="Yellow"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Level}" Value="Rouge">
+                                    <Setter Property="Background" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+
+</Window>

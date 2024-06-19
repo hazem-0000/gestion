@@ -1,0 +1,154 @@
+﻿<Window x:Class="gestion.MainWindow"
+       
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gestion"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1200" FontSize="20" FontFamily="helvetica" FontWeight="Medium" Background="#B3E5FC" MinHeight="700"  Icon="/assets/cofat.png"
+            
+            >
+
+
+
+    <Grid >
+        <Grid.Resources>
+            <!-- Button Style -->
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#F5F5F5"/>
+                <Setter Property="Foreground" Value="black"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Background="#B3E5FC" Grid.Column="0"  BorderThickness="0" MinWidth="280">
+            <TabItem Header="    Accueil  " MinWidth="100">
+                <!-- Settings Content -->
+                <StackPanel  MinWidth="280" Orientation="Vertical">
+
+                    <Button Click="employees_list_button" Margin="0,0,0,5" Padding="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Label  Content="&#xf015;" Foreground="Teal" FontFamily="./#Font Awesome 6 Free Solid" Margin="0,0,5,0" Width="33"/>
+                            <TextBlock Text="   Liste employés" RenderTransformOrigin="0.5,0.5" Width="203">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-0.561"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button  Click="Qualifications" Margin="0,0,0,5" Padding="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Label  Content="&#xf0c9;" Foreground="Teal" FontFamily="./#Font Awesome 6 Free Solid" Margin="0,0,5,0" Width="33"/>
+                            <TextBlock Text="Gerer Qualifications"/>
+                        </StackPanel>
+                    </Button>
+
+                    <StackPanel>
+                      
+                    </StackPanel>
+
+                    <Button Click="SignOutButton_Click" VerticalAlignment="Bottom" Margin="0,0,0,5" Padding="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Label  Content="&#xf2f5;" Foreground="Red" FontFamily="./#Font Awesome 6 Free Solid" Margin="0,0,5,0" Width="33"/>
+                            <TextBlock Text="Déconnexion"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                    
+
+
+            </TabItem>
+            <TabItem Header="    Filtre    " Margin="-2,-2,-14,0">
+                <StackPanel VerticalAlignment="Stretch" Orientation="Vertical" Margin="5"  >
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Nom:" VerticalAlignment="Center" Margin="5" Width="80" />
+                        <TextBox x:Name="NameTextBox" Width="170" Margin="5"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="CIN:" VerticalAlignment="Center" Margin="5" Width="80"/>
+                        <TextBox x:Name="CINTextBox" Width="170" Margin="5"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Projet:" VerticalAlignment="Center" Margin="5" Width="80"/>
+                        <TextBox x:Name="ProjectTextBox" Width="170" Margin="5"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Famille:" VerticalAlignment="Center" Margin="5" Width="80"/>
+                        <TextBox x:Name="FamilleTextBox" Width="170" Margin="5"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Zone:" VerticalAlignment="Center" Margin="5" Width="80"/>
+                        <TextBox x:Name="ZoneTextBox" Width="170" Margin="5"/>
+                    </StackPanel>
+
+                    <!-- StackPanel for Qualification Name -->
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <Label Content="Qualification:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" />
+                        <TextBox x:Name="QualificationNameTextBox" Height="35" Width="180" Margin="5"/>
+                    </StackPanel>
+
+                    <!-- StackPanel for Qualification Levels -->
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <Label Content="Niveau Qualification" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <CheckBox BorderThickness="2" x:Name="RedCheckBox" Content="Rouge" Margin="5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                            <CheckBox BorderThickness="2" x:Name="YellowCheckBox" Content="Jaune" Margin="5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                            <CheckBox BorderThickness="2" x:Name="GreenCheckBox" Content="Vert" Margin="5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                            <!-- Add more checkboxes for other qualification levels if needed -->
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Apply Filter Button -->
+                    <Button  Width="200" Height="50"  Margin="10" Click="ApplyFilter_Button" >
+                        <StackPanel Orientation="Horizontal">
+                            <Label  Content="&#xf1de;" Foreground="Teal" FontFamily="./#Font Awesome 6 Free Solid" Width="32"/>
+                            <TextBlock Text="Appliquer le filtre"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+                <!-- Add more admin management buttons as needed -->
+
+            </TabItem>
+        </TabControl>
+
+        <Frame x:Name="login" Grid.ColumnSpan="2" Visibility="Hidden"/>
+        <Frame  x:Name="MainFrame" Grid.Column="1" Background="Aqua" Visibility="Hidden" />
+
+    </Grid>
+
+</Window>
